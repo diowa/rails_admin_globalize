@@ -34,13 +34,13 @@ module RailsAdmin
         end
 
         register_instance_option :http_methods do
-          [:get,:patch]
+          [:get, :put, :patch]
         end
 
         register_instance_option :controller do
 
           Proc.new do
-            @available_locales = (I18n.available_locales - [I18n.locale])
+            @available_locales = (I18n.available_locales - [I18n.locale]).map(&:to_s)
             @available_locales = @object.available_locales if @object.respond_to?("available_locales")
 
             @already_translated_locales = []

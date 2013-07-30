@@ -20,9 +20,8 @@
 %h2= "Translating into #{@target_locale.upcase}"
 
 .row-fluid
-  .span2
+  .span12
     = select_tag 'target_locale', options_for_select(@already_translated_locales), :prompt => "Already Translated Locales", :id => "target_locale_already_select", :"data-target-url" => rails_admin.globalize_path(@object.class.to_s.split("::").map(&:underscore).join("~"), @object.id)
-  .span2
     = select_tag 'target_locale', options_for_select(@not_yet_translated_locales), :prompt => "Not-Yet-Translated Locales", :id => "target_locale_not_yet_select", :"data-target-url" => rails_admin.globalize_path(@object.class.to_s.split("::").map(&:underscore).join("~"), @object.id)
 
 = form_for @object, :url => rails_admin.globalize_path(@object.class.to_s.split("::").map(&:underscore).join("~"), @object.id), :html => {:class => 'globalize-form'} do |form|
