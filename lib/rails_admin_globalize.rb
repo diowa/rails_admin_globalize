@@ -48,10 +48,9 @@ module RailsAdmin
 
             @not_yet_translated_locales = @available_locales - @already_translated_locales
 
-            if request.get?
-              @target_locale = params[:target_locale] || @available_locales.first || I18n.locale
+            @target_locale = params[:target_locale] || @available_locales.first || I18n.locale
 
-            else
+            unless request.get?
               result = ::Globalize.with_locale params[:target_locale] do
                 p = params[@abstract_model.param_key]
                 p = p.permit! if @object.class.include?(ActiveModel::ForbiddenAttributesProtection) rescue nil
