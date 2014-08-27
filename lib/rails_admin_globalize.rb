@@ -51,7 +51,7 @@ module RailsAdmin
             @target_locale = params[:target_locale] || @available_locales.first || I18n.locale
 
             unless request.get?
-              result = ::Globalize.with_locale params[:target_locale] do
+              result = I18n.with_locale params[:target_locale] do
                 p = params[@abstract_model.param_key]
                 p = p.permit! if @object.class.include?(ActiveModel::ForbiddenAttributesProtection) rescue nil
                 @object.update_attributes(p)
