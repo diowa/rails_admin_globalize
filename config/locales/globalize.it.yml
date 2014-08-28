@@ -12,4 +12,5 @@ it:
         associated_translations: "Traduzioni per %{associated_model}"
   rails_admin:
     globalize:
+      error: "Si è verificato un errore durante la traduzione"
       success: "Traduzione salvata correttamente"

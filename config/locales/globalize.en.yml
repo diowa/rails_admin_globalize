@@ -11,4 +11,5 @@ en:
         done: "Globalized"
   rails_admin:
     globalize:
+      error: "An error occurred during translation"
       success: "Translation saved"
