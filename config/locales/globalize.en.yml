@@ -12,4 +12,5 @@ en:
   rails_admin:
     globalize:
       error: "An error occurred during translation"
+      not_allowed: "You are not allowed to translate in this locale"
       success: "Translation saved"

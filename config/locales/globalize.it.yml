@@ -13,4 +13,5 @@ it:
   rails_admin:
     globalize:
       error: "Si è verificato un errore durante la traduzione"
+      not_allowed: "Non hai il permesso di tradurre in questa lingua"
       success: "Traduzione salvata correttamente"
