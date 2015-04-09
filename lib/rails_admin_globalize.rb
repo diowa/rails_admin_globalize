@@ -37,8 +37,15 @@ module RailsAdmin
 
         register_instance_option :controller do
           Proc.new do
-            @available_locales = I18n.available_locales
-            @already_translated_locales = @object.try(:available_locales) || []
+            @available_locales = I18n.available_locales.map(&:to_s)
+
+            @already_translated_locales =
+              if @object.respond_to? 'translated_locales'
+                @object.translated_locales.map(&:to_s)
+              else
+                []
+              end
+
             @not_yet_translated_locales = @available_locales - @already_translated_locales
 
             if request.get?
