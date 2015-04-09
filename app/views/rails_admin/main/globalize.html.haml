@@ -33,12 +33,12 @@
 
       .form-group
         .row
-          .col-xs-4
+          .col-sm-4
             .form-control{ class: "#{rails_admin_fields[t].type}_type", disabled: true }
               .original-content
                 = raw @object.send(t)
 
-          .col-xs-8
+          .col-sm-8
             - Globalize.with_locale target_locale do
               = render :partial => "globalize_field", :locals => { :object => @object, :form => form, :field => rails_admin_fields[t] }
 

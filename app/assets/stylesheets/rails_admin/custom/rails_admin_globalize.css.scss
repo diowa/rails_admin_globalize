@@ -1,9 +1,10 @@
 .globalize-form {
   .form-control {
     &.text_type {
-      overflow-x: auto;
-      overflow-y: auto;
+      overflow: auto;
       height: auto;
+      min-height: (34px * 2);
+      max-height: (34px * 5);
     }
   }
 }
