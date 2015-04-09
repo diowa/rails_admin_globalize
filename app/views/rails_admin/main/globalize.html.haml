@@ -21,23 +21,26 @@
 = javascript_include_tag "rails_admin/custom/rails_admin_globalize.js"
 = stylesheet_link_tag "rails_admin/custom/rails_admin_globalize.css"
 
-%p= raw I18n.translate("admin.actions.globalize.subtitle", :locale_name => "<strong>#{I18n.locale}</strong>".upcase)
-
 = rails_admin_form_for @object, :url => rails_admin.globalize_path(@abstract_model, @object.id), :as => @abstract_model.param_key, :html => {:multipart => true, :class => 'globalize-form'} do |form|
-  = select_tag 'target_locale', grouped_options_for_select(@grouped_options_for_select, @target_locale), :id => "target_locale_select", :"data-target-url" => rails_admin.globalize_path(@object.class.to_s.split("::").map(&:underscore).join("~"), @object.id)
-  
+  %fieldset
+    %h5= raw I18n.translate("admin.actions.globalize.subtitle", :locale_name => "<strong>#{I18n.locale}</strong>".upcase)
+    .form-group
+      = select_tag 'target_locale', grouped_options_for_select(@grouped_options_for_select, @target_locale), :id => "target_locale_select", :"data-target-url" => rails_admin.globalize_path(@object.class.to_s.split("::").map(&:underscore).join("~"), @object.id), class: 'form-control'
+
   - rails_admin_fields.keys.each do |t|
-    %h5 #{@object.class.human_attribute_name(t.to_sym)}:
+    %fieldset
+      %legend= @object.class.human_attribute_name(t.to_sym)
 
-    .row-fluid
-      .span4
-        .controls.well{ :class => "#{rails_admin_fields[t].type}_type" }
-          .original-content
-            = raw @object.send(t)
+      .form-group
+        .row
+          .col-xs-4
+            .form-control{ class: "#{rails_admin_fields[t].type}_type", disabled: true }
+              .original-content
+                = raw @object.send(t)
 
-      .span8
-        - Globalize.with_locale target_locale do
-          = render :partial => "globalize_field", :locals => { :object => @object, :form => form, :field => rails_admin_fields[t] }
+          .col-xs-8
+            - Globalize.with_locale target_locale do
+              = render :partial => "globalize_field", :locals => { :object => @object, :form => form, :field => rails_admin_fields[t] }
 
   - if @associated_translations
     - @associated_translations.each do |association|
@@ -92,5 +95,5 @@
               - @sub_associated_translations[:has_one].each do |has_one_associated_model|
                 - # TODO
 
-  .form-horizontal
+  .form-group.form-actions
     = render 'submit_buttons'

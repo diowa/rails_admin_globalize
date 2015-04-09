@@ -1,28 +1,9 @@
 .globalize-form {
-  h4 {
-    font-size: 22px;
-    margin: 60px 0 15px;
-    padding: 0;
-    strong {
-      color: #9D261D;
-      font-size: 26px;
-      padding: 0 0 0 7px;
-    }
-  }
-  h5 {
-    border-bottom: 1px solid #dddddd;
-    font-size: 16px;
-    margin: 40px 0 15px;
-    padding: 0 0 15px;
-  }
-  .controls.well {
-    &.string_type {
-      padding: 4px 19px;
-    }
+  .form-control {
     &.text_type {
       overflow-x: auto;
       overflow-y: auto;
-      height: 310px;
+      height: auto;
     }
   }
 }

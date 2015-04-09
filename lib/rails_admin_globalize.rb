@@ -52,7 +52,7 @@ module RailsAdmin
               @target_locale = params[:target_locale] || @available_locales.first || I18n.locale
             else
               ::Globalize.with_locale params[:target_locale] do
-                sanitize_params_for!(:update)
+                sanitize_params_for!(request.xhr? ? :modal : :update)
 
                 @object.set_attributes(params[@abstract_model.param_key])
                 @authorization_adapter && @authorization_adapter.attributes_for(:update, @abstract_model).each do |name, value|
@@ -60,10 +60,10 @@ module RailsAdmin
                 end
 
                 if @object.save
-                  flash[:notice] = I18n.t("rails_admin.globalize.success")
+                  flash[:success] = I18n.t("rails_admin.globalize.success")
                   redirect_to back_or_index
                 else
-                  flash[:alert] = I18n.t("rails_admin.globalize.error")
+                  flash[:error] = I18n.t("rails_admin.globalize.error")
                 end
               end
             end
