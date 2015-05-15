@@ -1,5 +1,6 @@
 .globalize-form {
   .form-control {
+    &.ck_editor_type,
     &.text_type {
       overflow: auto;
       height: auto;
