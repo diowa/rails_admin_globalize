@@ -47,7 +47,7 @@ module RailsAdmin
               end
 
             @not_yet_translated_locales = @available_locales - @already_translated_locales
-            @target_locale = params[:target_locale] || @available_locales.first || I18n.locale
+            @target_locale = params[:target_locale] || @not_yet_translated_locales.first || I18n.locale
 
             if request.put? || request.patch?
               ::Globalize.with_locale params[:target_locale] do
