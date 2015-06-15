@@ -47,10 +47,9 @@ module RailsAdmin
               end
 
             @not_yet_translated_locales = @available_locales - @already_translated_locales
+            @target_locale = params[:target_locale] || @available_locales.first || I18n.locale
 
-            if request.get?
-              @target_locale = params[:target_locale] || @available_locales.first || I18n.locale
-            else
+            if request.put? || request.patch?
               ::Globalize.with_locale params[:target_locale] do
                 sanitize_params_for!(request.xhr? ? :modal : :update)
 
@@ -60,10 +59,9 @@ module RailsAdmin
                 end
 
                 if @object.save
-                  flash[:success] = I18n.t("rails_admin.globalize.success")
-                  redirect_to back_or_index
+                  flash[:success] = I18n.t('rails_admin.globalize.success')
                 else
-                  flash[:error] = I18n.t("rails_admin.globalize.error")
+                  flash[:error] = I18n.t('rails_admin.globalize.error')
                 end
               end
             end
