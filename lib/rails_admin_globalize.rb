@@ -5,6 +5,9 @@ end
 
 require 'rails_admin/config/actions'
 
+# Allow search in translated fields
+require "rails_admin_globalize/adapters/active_record"
+
 module RailsAdmin
   module Config
     module Actions
